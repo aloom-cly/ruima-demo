@@ -1,0 +1,101 @@
+[v-cloak] {
+  display: none;
+}
+.demo-btn {
+  width: 200px;
+  height: 50px;
+  background: #409eff;
+  color: #fff;
+  font-size: 16px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -100px;
+}
+.collection-dialog .el-dialog__header {
+  padding: 10px 20px 10px;
+  background: #ff7600;
+}
+.collection-dialog .el-dialog__title {
+  font-size: 16px;
+  color: #fff;
+}
+.collection-dialog .el-dialog__headerbtn {
+  top: 10px;
+}
+.collection-dialog .el-dialog__headerbtn .el-dialog__close {
+  color: #fff;
+}
+.collection-dialog .el-dialog__footer {
+  text-align: center;
+}
+.collection-dialog .el-dialog .el-button {
+  padding: 8px 16px;
+  border-radius: 2px;
+}
+.collection-dialog .el-dialog .el-button:hover,
+.collection-dialog .el-dialog .el-button:active,
+.collection-dialog .el-dialog .el-button:focus {
+  background-color: #ff7600;
+  border-color: #ff7600;
+  color: #fff;
+  opacity: 0.8;
+}
+.collection-dialog .el-button + .el-button {
+  margin-left: 20px;
+}
+.collection-dialog .orange-btn {
+  background-color: #ff7600;
+  border-color: #ff7600;
+  color: #fff;
+}
+.collection-dialog .el-input {
+  width: auto;
+}
+.collection-dialog .add-text-btn {
+  float: right;
+}
+.collection-dialog .text-red {
+  color: red;
+}
+.collection-dialog .el-input__inner {
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+}
+.collection-dialog .block-row {
+  margin-top: 16px;
+}
+.collection-dialog .block-row .el-tag + .el-tag {
+  margin-left: 10px;
+}
+.collection-dialog .add-icon {
+  color: #ff7600;
+  font-size: 20px;
+  float: right;
+  cursor: pointer;
+}
+.collection-dialog .data-item {
+  display: flex;
+  margin-top: 10px;
+}
+.collection-dialog .data-item .flex-box {
+  display: flex;
+  flex-grow: 1;
+  margin-right: 12px;
+}
+.collection-dialog .del-item-icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  align-items: center;
+  font-size: 20px;
+  justify-content: center;
+  border: 1px solid #eee;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.collection-dialog .el-select-dropdown__item.selected {
+  color: #ff7600;
+}

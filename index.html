@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUNMA DEMO</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div id="app" class="content" v-cloak>
+    <el-button class="demo-btn" type="primary" @click="dialogVisible = true">点击打开示例</el-button>
+    <el-dialog
+      class="collection-dialog"
+      title="采集区及告警配置"
+      :visible.sync="dialogVisible"
+      width="50%"
+      :before-close="handleClose">
+      <div class="collection-con">
+        <div class="block-row">
+          <span><span class="text-red">*</span>采集区绘制</span>
+          <el-input v-model="inputInfo" placeholder="请输入内容"></el-input>
+          <el-button class="add-text-btn orange-btn" @click="addTags()">添加</el-button>
+        </div>
+        <div class="block-row">
+          <span>&nbsp;&nbsp;摄像头区域</span>
+          <el-tag
+            v-for="tag in tags"
+            :key="tag"
+            closable
+            type="warning"
+            @close="tagHandleClose(tag)">
+            {{tag}}
+          </el-tag>
+        </div>
+        <div class="block-row">
+          <div class="title-con">
+            <span>采集区及告警配置</span>
+            <i class="el-icon-circle-plus add-icon" @click="addDataItem()"></i>
+          </div>
+          <div class="data-con">
+            <div class="data-item" v-for="(item,index) in dataList" :key="index">
+              <el-select class="flex-box" v-model="item.value1" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+              <el-select class="flex-box" v-model="item.value2" placeholder="请选择">
+                <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+              <el-input class="flex-box" v-model="item.value3" placeholder="请输入超员阈值"></el-input>
+              <span class="del-item-icon" @click="delDataItem(index)">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="warning" class="save-btn orange-btn"  @click="dialogVisible = false">保 存</el-button>
+      </span>
+    </el-dialog>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          dialogVisible: false,
+          inputInfo:'',
+          tags: ['下拉框1','下拉框2','下拉框3'],
+          options1: [{
+            value: '下拉框1',
+            label: '下拉框1'
+          }, {
+            value: '下拉框2',
+            label: '下拉框2'
+          }, {
+            value: '下拉框3',
+            label: '下拉框3'
+          }],
+          options2: [{
+            value: '下拉框1',
+            label: '下拉框1'
+          }, {
+            value: '下拉框2',
+            label: '下拉框2'
+          }, {
+            value: '下拉框3',
+            label: '下拉框3'
+          }],
+          dataList:[{
+            value1:'',
+            value2:'',
+            value3:''
+          },{
+            value1:'',
+            value2:'',
+            value3:''
+          },{
+            value1:'',
+            value2:'',
+            value3:''
+          }]
+        };
+      },
+      methods: {
+        tagHandleClose(tag){
+          this.$confirm('确定要删除此条数据?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.tags.splice(this.tags.indexOf(tag), 1);
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });          
+          });
+        },
+        addTags(){
+          if(this.inputInfo.trim() == ''){
+            this.$message({
+              message: '请输入采集区绘制内容',
+              type: 'warning'
+            });
+            return false;
+          }
+          if( this.tags.indexOf(this.inputInfo.trim()) > -1 ){
+            this.$message({
+              message: '请勿重复添加数据',
+              type: 'warning'
+            });
+          }else{
+            this.tags.push(this.inputInfo);
+          }
+        },
+        addDataItem(){
+          var item = {
+            value1: '',
+            value2: '',
+            value3: ''
+          };
+          this.dataList.push(item);
+        },
+        delDataItem(index){
+          this.$confirm('确定要删除此条数据?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.dataList.splice(index,1);
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });          
+          });
+        },
+        handleClose(done) {
+          this.$confirm('确认关闭？')
+            .then(_ => {
+              done();
+            })
+            .catch(_ => {});
+        }
+      }
+    })
+  </script>
+</body>
+</html>
